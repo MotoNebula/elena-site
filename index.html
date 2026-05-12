@@ -28,23 +28,62 @@
   </div>
 </nav>
 
-<!-- 01 HERO -->
+<!-- HERO -->
 <section class="hero" id="hero">
+  <!-- Тонкие линии, сходящиеся к ладони, и фоновые акценты -->
+  <div class="hero__deco" aria-hidden="true">
+    <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <line x1="-20" y1="160" x2="1000" y2="360" stroke="#C8917A" stroke-width="0.8" opacity="0.11"/>
+      <line x1="-20" y1="270" x2="1000" y2="360" stroke="#C8917A" stroke-width="0.7" opacity="0.08"/>
+      <line x1="-20" y1="440" x2="1000" y2="360" stroke="#C8917A" stroke-width="0.7" opacity="0.08"/>
+      <line x1="-20" y1="540" x2="1000" y2="360" stroke="#C8917A" stroke-width="0.5" opacity="0.06"/>
+      <circle cx="130" cy="210" r="3" fill="#C8917A" opacity="0.22"/>
+      <circle cx="300" cy="470" r="2.5" fill="#8A9E7E" opacity="0.22"/>
+      <circle cx="70" cy="390" r="6" fill="#FCDEC8" opacity="0.45"/>
+      <circle cx="470" cy="140" r="2" fill="#C8917A" opacity="0.18"/>
+      <circle cx="600" cy="550" r="4" fill="#8A9E7E" opacity="0.15"/>
+      <text x="55" y="600" fill="#8A9E7E" opacity="0.055" font-size="20" font-family="Georgia, serif" font-style="italic">опора</text>
+      <text x="210" y="130" fill="#C8917A" opacity="0.055" font-size="16" font-family="Georgia, serif" font-style="italic">принятие</text>
+      <text x="380" y="580" fill="#8A9E7E" opacity="0.045" font-size="14" font-family="Georgia, serif" font-style="italic">исцеление</text>
+      <!-- листья внизу слева -->
+      <path d="M 18,618 Q 58,575 98,618 Q 58,660 18,618 Z" fill="#8A9E7E" opacity="0.14"/>
+      <path d="M 68,662 Q 112,618 152,662 Q 112,706 68,662 Z" fill="#8A9E7E" opacity="0.09"/>
+      <path d="M 35,660 Q 65,628 95,660 Q 65,692 35,660 Z" fill="#8A9E7E" opacity="0.07"/>
+    </svg>
+  </div>
+
   <div class="hero__inner">
     <div class="hero__content">
-      <p class="hero__eyebrow">ПСИХОЛОГ</p>
-      <h1 class="hero__name">Елена<br>Коновалова</h1>
-      <p class="hero__subtitle">Твой кризисный психолог</p>
+      <p class="hero__eyebrow">Елена Коновалова</p>
+      <h1 class="hero__name">Твой кризисный<br>психолог</h1>
       <p class="hero__tagline">Готова быть рядом в непростой период вашей жизни</p>
+      <p class="hero__micro">Не обязательно проходить это одному.</p>
       <a href="#contacts" class="btn btn--primary">Записаться на консультацию</a>
     </div>
+
     <div class="hero__illustration" aria-hidden="true">
-      <svg class="hand-svg" viewBox="0 0 280 370" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- viewBox расширен чтобы вместить слова-плашки вокруг ладони -->
+      <svg class="hand-svg" viewBox="-45 -35 385 460" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <filter id="hand-glow" x="-20%" y="-20%" width="140%" height="140%">
+          <filter id="hand-glow" x="-25%" y="-25%" width="150%" height="150%">
             <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#C4A882" flood-opacity="0.28"/>
           </filter>
         </defs>
+
+        <!-- плашки вокруг ладони -->
+        <rect x="-42" y="52" width="72" height="22" rx="11" fill="#FCDEC8"/>
+        <text x="-6" y="67" text-anchor="middle" fill="#7A5A3A" font-size="11" font-family="Inter, system-ui, sans-serif">травма</text>
+
+        <rect x="220" y="28" width="92" height="22" rx="11" fill="#D8ECD4"/>
+        <text x="266" y="43" text-anchor="middle" fill="#3D6235" font-size="11" font-family="Inter, system-ui, sans-serif">выгорание</text>
+
+        <rect x="-42" y="198" width="96" height="22" rx="11" fill="#FCDEC8"/>
+        <text x="6" y="213" text-anchor="middle" fill="#7A5A3A" font-size="11" font-family="Inter, system-ui, sans-serif">зависимость</text>
+
+        <rect x="230" y="214" width="84" height="22" rx="11" fill="#D8ECD4"/>
+        <text x="272" y="229" text-anchor="middle" fill="#3D6235" font-size="11" font-family="Inter, system-ui, sans-serif">сепарация</text>
+
+        <!-- ладонь -->
         <g filter="url(#hand-glow)">
           <rect x="58" y="148" width="170" height="148" rx="30" fill="#EDD5B5"/>
           <rect x="80" y="290" width="128" height="56" rx="16" fill="#EDD5B5"/>
@@ -56,15 +95,14 @@
         </g>
         <path d="M 82,218 Q 148,202 222,220" stroke="#C4986A" stroke-width="1.2" fill="none" opacity="0.22" stroke-linecap="round"/>
         <path d="M 88,248 Q 148,234 216,250" stroke="#C4986A" stroke-width="1" fill="none" opacity="0.18" stroke-linecap="round"/>
-        <text x="148" y="194" text-anchor="middle" fill="#7A5A3A" font-size="14" font-style="italic" font-family="Cormorant Garamond, Georgia, serif">тревога</text>
-        <text x="100" y="226" text-anchor="middle" fill="#6A4E35" font-size="11.5" font-family="Inter, system-ui, sans-serif">травма</text>
-        <text x="196" y="221" text-anchor="middle" fill="#6A4E35" font-size="10" font-family="Inter, system-ui, sans-serif">выгорание</text>
-        <text x="148" y="256" text-anchor="middle" fill="#7A5A3A" font-size="13" font-style="italic" font-family="Cormorant Garamond, Georgia, serif">кризис</text>
-        <text x="100" y="280" text-anchor="middle" fill="#6A4E35" font-size="10" font-family="Inter, system-ui, sans-serif">зависимость</text>
-        <text x="200" y="277" text-anchor="middle" fill="#6A4E35" font-size="10" font-family="Inter, system-ui, sans-serif">сепарация</text>
+
+        <!-- слова внутри ладони -->
+        <text x="148" y="200" text-anchor="middle" fill="#7A5A3A" font-size="15" font-style="italic" font-family="Cormorant Garamond, Georgia, serif">тревога</text>
+        <text x="148" y="258" text-anchor="middle" fill="#7A5A3A" font-size="14" font-style="italic" font-family="Cormorant Garamond, Georgia, serif">кризис</text>
       </svg>
     </div>
   </div>
+
   <div class="hero__wave">
     <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
       <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#F3EDE3"/>
@@ -72,8 +110,18 @@
   </div>
 </section>
 
-<!-- 02 ABOUT -->
+<!-- ABOUT -->
 <section class="section about" id="about">
+  <!-- листья-акценты справа -->
+  <div class="about__deco" aria-hidden="true">
+    <svg viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 160,50 Q 200,20 200,80 Q 170,90 160,50 Z" fill="#8A9E7E" opacity="0.18"/>
+      <path d="M 140,110 Q 195,80 200,140 Q 165,148 140,110 Z" fill="#8A9E7E" opacity="0.13"/>
+      <path d="M 165,170 Q 200,145 198,200 Q 172,202 165,170 Z" fill="#8A9E7E" opacity="0.1"/>
+      <line x1="180" y1="80" x2="155" y2="170" stroke="#8A9E7E" stroke-width="0.8" opacity="0.12" stroke-linecap="round"/>
+    </svg>
+  </div>
+
   <div class="container">
     <div class="about__grid">
       <div class="about__visual">
@@ -84,16 +132,18 @@
             alt="Елена Коновалова — психолог"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
           >
-          <div class="about__initials-fallback">ЕК</div>
+          <div class="about__photo-fallback">
+            <span>Фото<br>скоро</span>
+          </div>
         </div>
       </div>
       <div class="about__text">
-        <span class="section__num">02</span>
-        <h2>Привет! Я Лена</h2>
-        <p class="about__role">кризисный психолог</p>
-        <p>Помогаю тем, кто жил в боли, критике и эмоциональном холоде. Я знаю, как бывает одиноко в кризисе.</p>
+        <h2>Привет, я Лена</h2>
+        <p class="about__role">Кризисный психолог</p>
+        <p class="about__accent">Я знаю, как бывает больно и одиноко. Поэтому моя работа состоит в том, чтобы быть рядом бережно, честно и внимательно.</p>
+        <p>Помогаю тем, кто жил в боли, критике и эмоциональном холоде.</p>
         <p>Работаю сопровождающим психологом при прохождении программ 12 шагов ВДА/ДФС, любовная зависимость/созависимость.</p>
-        <p>В профессию я пришла через личный кризис. Теперь я точно знаю: в любой, даже самой трудной ситуации можно найти опору, осознать свою способность исцеляться и расти.</p>
+        <p>В профессию пришла через личный кризис. Теперь точно знаю: в любой, даже самой трудной ситуации можно найти опору и осознать свою способность расти.</p>
         <blockquote class="about__quote">
           Мой терапевтический стиль — бережный и поддерживающий.
         </blockquote>
@@ -102,10 +152,9 @@
   </div>
 </section>
 
-<!-- 03 JOURNEY (MARIO) -->
+<!-- JOURNEY (MARIO) -->
 <section class="section journey" id="journey">
   <div class="container">
-    <span class="section__num section__num--light">03</span>
     <h2 class="journey__title">Путь героя</h2>
     <p class="journey__subtitle">Каждый из нас — герой своей истории. На пути встречаются препятствия, но каждое преодоление добавляет силу.</p>
   </div>
@@ -124,10 +173,9 @@
   </div>
 </section>
 
-<!-- 04 METHOD -->
+<!-- METHOD -->
 <section class="section method" id="method">
   <div class="container">
-    <span class="section__num">04</span>
     <h2>Мой подход</h2>
     <div class="method__intro">
       <p>Использую интегративный подход — не являюсь адептом какого-то одного метода. В работе уделяю много внимания телесному проживанию, интеграции эмоций, ощущений, мыслей, опыта, формированию новой целостной идентичности.</p>
@@ -164,80 +212,58 @@
           <li>химическими зависимостями</li>
           <li>острыми психотическими состояниями</li>
         </ul>
+        <p class="method__no-note">В этих случаях лучше обратиться к профильному специалисту или в специализированную службу помощи.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 05 EDUCATION -->
+<!-- EDUCATION -->
 <section class="section education" id="education">
   <div class="container">
-    <span class="section__num section__num--light">05</span>
     <h2>Образование</h2>
     <p class="education__subtitle">Для меня важно постоянное профессиональное развитие</p>
-    <div class="timeline">
-      <div class="timeline__item">
-        <div class="timeline__year">2023</div>
-        <div class="timeline__dot"></div>
-        <div class="timeline__content">
-          <strong>Кризисный психолог</strong>
-          <span>АНО ДПО НАДПО — 1020 ак.ч.</span>
-        </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <span class="edu-year">2023</span>
+        <strong>Кризисный психолог</strong>
+        <span>АНО ДПО НАДПО — 1020 ак.ч.</span>
       </div>
-      <div class="timeline__item">
-        <div class="timeline__year">2023</div>
-        <div class="timeline__dot"></div>
-        <div class="timeline__content">
-          <strong>Резильентность: адаптация к стрессу и терапия расстройств</strong>
-          <span>Даниил Островский. Психотерапия и привязанность — 82 ак.ч.</span>
-        </div>
+      <div class="edu-card">
+        <span class="edu-year">2023</span>
+        <strong>Резильентность: адаптация к стрессу и терапия расстройств</strong>
+        <span>Даниил Островский. Психотерапия и привязанность — 82 ак.ч.</span>
       </div>
-      <div class="timeline__item">
-        <div class="timeline__year">2024</div>
-        <div class="timeline__dot"></div>
-        <div class="timeline__content">
-          <strong>Краткосрочная терапия принятия и ответственности</strong>
-          <span>Татьяна Кобзева — 82 ак.ч.</span>
-        </div>
+      <div class="edu-card">
+        <span class="edu-year">2024</span>
+        <strong>Краткосрочная терапия принятия и ответственности</strong>
+        <span>Татьяна Кобзева — 82 ак.ч.</span>
       </div>
-      <div class="timeline__item timeline__item--active">
-        <div class="timeline__year">2024–2026</div>
-        <div class="timeline__dot"></div>
-        <div class="timeline__content">
-          <strong>Институт Мета-Персональной терапии</strong>
-          <span>в процессе обучения</span>
-        </div>
+      <div class="edu-card edu-card--active">
+        <span class="edu-year">2024–2026</span>
+        <strong>Институт Мета-Персональной терапии</strong>
+        <span>в процессе обучения</span>
       </div>
-      <div class="timeline__item">
-        <div class="timeline__year">2024–2025</div>
-        <div class="timeline__dot"></div>
-        <div class="timeline__content">
-          <strong>Конференция Докпсифест</strong>
-        </div>
+      <div class="edu-card">
+        <span class="edu-year">2024–2025</span>
+        <strong>Конференция Докпсифест</strong>
       </div>
-      <div class="timeline__item">
-        <div class="timeline__year">2025</div>
-        <div class="timeline__dot"></div>
-        <div class="timeline__content">
-          <strong>Клуб психологического мастерства</strong>
-        </div>
+      <div class="edu-card">
+        <span class="edu-year">2025</span>
+        <strong>Клуб психологического мастерства</strong>
       </div>
-      <div class="timeline__item timeline__item--active">
-        <div class="timeline__year">2025</div>
-        <div class="timeline__dot"></div>
-        <div class="timeline__content">
-          <strong>Московский гештальт институт</strong>
-          <span>в процессе обучения</span>
-        </div>
+      <div class="edu-card edu-card--active">
+        <span class="edu-year">2025</span>
+        <strong>Московский гештальт институт</strong>
+        <span>в процессе обучения</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 06 FACTS -->
+<!-- FACTS -->
 <section class="section facts" id="facts">
   <div class="container">
-    <span class="section__num">06</span>
     <h2>Немного обо мне</h2>
     <div class="facts__grid">
       <div class="fact">
@@ -277,19 +303,35 @@
       </div>
       <div class="fact">
         <div class="fact__photo-wrap">
-          <img src="img/fact-nepal-stupa.jpg" alt="Интерес к человеку" class="fact__photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <img src="img/fact-nepal-stupa.jpg" alt="Исследование сознания" class="fact__photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="fact__icon-fallback">🔍</div>
         </div>
-        <p>Мой главный интерес — как устроен человек и его сознание, как мир формирует психику и как это можно преодолеть</p>
+        <p>Мой главный интерес: как устроен человек и его сознание, как мир формирует психику и как это можно преодолеть. Благодаря своему исследовательскому интересу благополучно пережила экзистенциальный кризис.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 07 CONTACTS -->
+<!-- CONTACTS -->
 <section class="section contacts" id="contacts">
+  <!-- мягкое пятно и намёк на конверт -->
+  <div class="contacts__deco" aria-hidden="true">
+    <svg viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- конверт справа -->
+      <rect x="980" y="160" width="140" height="100" rx="6" fill="none" stroke="#E8E0D4" stroke-width="1.8" opacity="0.7"/>
+      <path d="M 980,160 L 1050,220 L 1120,160" fill="none" stroke="#E8E0D4" stroke-width="1.4" opacity="0.7" stroke-linejoin="round"/>
+      <path d="M 980,260 L 1020,215" fill="none" stroke="#E8E0D4" stroke-width="0.8" opacity="0.5" stroke-linecap="round"/>
+      <path d="M 1120,260 L 1080,215" fill="none" stroke="#E8E0D4" stroke-width="0.8" opacity="0.5" stroke-linecap="round"/>
+      <!-- сходящиеся линии к кнопкам -->
+      <line x1="0" y1="100" x2="500" y2="250" stroke="#C8917A" stroke-width="0.5" opacity="0.07"/>
+      <line x1="0" y1="400" x2="500" y2="250" stroke="#C8917A" stroke-width="0.5" opacity="0.07"/>
+      <!-- точки -->
+      <circle cx="150" cy="200" r="3" fill="#C8917A" opacity="0.15"/>
+      <circle cx="250" cy="380" r="2" fill="#8A9E7E" opacity="0.18"/>
+    </svg>
+  </div>
+
   <div class="container">
-    <span class="section__num section__num--light">07</span>
     <h2>Написать мне</h2>
     <p class="contacts__intro">Если сейчас непросто, можно начать с одного сообщения.</p>
     <div class="contacts__links">
@@ -339,7 +381,7 @@
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.fact, .timeline__item, .method__card').forEach(el => observer.observe(el));
+  document.querySelectorAll('.fact, .edu-card, .method__card').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
