@@ -42,11 +42,11 @@
   let nextSpawn = 80;
   let spawnCoin = true;
 
-  /* ── star seed (fixed, parallax) ── */
-  const STARS = Array.from({ length: 30 }, () => ({
-    x: Math.random() * 3000,
-    y: Math.random() * 0.65,
-    r: Math.random() > 0.7 ? 1.5 : 1,
+  /* ── cloud seed (parallax) ── */
+  const CLOUDS = Array.from({ length: 6 }, (_, i) => ({
+    x: i * 520 + Math.random() * 180,
+    y: 0.08 + Math.random() * 0.35,
+    sc: 0.65 + Math.random() * 0.55,
   }));
 
   /* ─────────────────────── DRAW HELPERS ─────────────────────── */
@@ -223,39 +223,44 @@
     ctx.fillText(text, x, y);
   }
 
+  function drawCloud(cx, cy, sc) {
+    ctx.fillStyle = 'rgba(255,255,255,0.92)';
+    ctx.beginPath(); ctx.arc(cx,          cy,          sc * 22, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx + sc*22,  cy + sc*8,   sc * 16, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx - sc*18,  cy + sc*8,   sc * 14, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx + sc*42,  cy + sc*10,  sc * 18, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx + sc*12,  cy - sc*10,  sc * 16, 0, Math.PI * 2); ctx.fill();
+  }
+
   function drawBackground() {
-    /* sky gradient */
-    const g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0,   '#150B22');
-    g.addColorStop(0.6, '#2D1B4E');
-    g.addColorStop(1,   '#1a0f25');
+    /* blue sky */
+    const g = ctx.createLinearGradient(0, 0, 0, GROUND);
+    g.addColorStop(0,   '#5BB8E8');
+    g.addColorStop(1,   '#B8DEFF');
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, W, H);
 
-    /* parallax stars */
-    ctx.fillStyle = 'rgba(255,255,255,0.7)';
-    for (const st of STARS) {
-      const sx = ((st.x - worldX * 0.06) % W + W) % W;
-      const sy = st.y * (GROUND - 20);
-      ctx.beginPath();
-      ctx.arc(sx, sy, st.r, 0, Math.PI * 2);
-      ctx.fill();
+    /* parallax clouds */
+    for (const cl of CLOUDS) {
+      const cx = ((cl.x - worldX * 0.18) % (W + 220) + W + 220) % (W + 220) - 110;
+      drawCloud(cx, cl.y * GROUND, cl.sc);
     }
 
-    /* ground */
-    ctx.fillStyle = '#2E1C42';
+    /* green ground */
+    ctx.fillStyle = '#4A9C2E';
     ctx.fillRect(0, GROUND, W, H - GROUND);
-    ctx.fillStyle = '#5A4070';
-    ctx.fillRect(0, GROUND, W, 3);
+    ctx.fillStyle = '#3A7D20';
+    ctx.fillRect(0, GROUND, W, 5);
 
-    /* subtle brick rows */
+    /* brick lines on ground */
     const bw = 70, bh = 18;
-    ctx.fillStyle = 'rgba(255,255,255,0.025)';
+    ctx.strokeStyle = 'rgba(0,0,0,0.08)';
+    ctx.lineWidth = 1;
     for (let row = 0; row < 2; row++) {
-      const oy = row === 0 ? 3 : 3 + bh + 1;
+      const oy = 5 + row * (bh + 1);
       const shift = row % 2 === 0 ? 0 : bw / 2;
       for (let bx = -((worldX + shift) % bw) - bw; bx < W + bw; bx += bw) {
-        ctx.fillRect(bx, GROUND + oy, bw - 2, bh - 1);
+        ctx.strokeRect(bx, GROUND + oy, bw - 2, bh - 1);
       }
     }
   }
@@ -384,11 +389,14 @@
 
       if (o.type === 'block') {
         drawBlock(sx, o.y, o.state === 'bumped');
+        if (o.state === 'idle') {
+          drawLabel(o.label, sx, o.y - s(54), '#1B6B2E', 'rgba(255,255,255,0.82)');
+        }
         if (o.coin) {
           drawCoin(sx, o.coin.y, o.coin.la);
-          if (o.coin.la > 0.25) {
+          if (o.coin.la > 0.2) {
             ctx.globalAlpha = Math.min(1, o.coin.la * 1.5);
-            drawLabel(o.label, sx, o.coin.y - s(24), '#1B6B2E', 'rgba(255,255,255,0.93)');
+            drawLabel(o.label, sx, o.coin.y - s(24), '#1B6B2E', 'rgba(255,255,255,0.95)');
             ctx.globalAlpha = 1;
           }
         }
@@ -396,18 +404,22 @@
 
       if (o.type === 'goomba') {
         drawGoomba(sx, o.y, o.state === 'squish');
-        if (o.la > 0 && o.state === 'squish') {
+        if (o.state === 'walk') {
+          drawLabel(o.label, sx, o.y - s(46), '#8B0000', 'rgba(255,220,220,0.88)');
+        } else if (o.la > 0) {
           ctx.globalAlpha = o.la;
-          drawLabel(o.label, sx, o.y - s(38), '#8B0000', 'rgba(255,220,220,0.93)');
+          drawLabel(o.label, sx, o.y - s(38), '#8B0000', 'rgba(255,220,220,0.95)');
           ctx.globalAlpha = 1;
         }
       }
 
       if (o.type === 'rock') {
         drawRock(sx, o.y);
-        if (o.la > 0 && o.state === 'land') {
+        if (o.state === 'falling') {
+          drawLabel(o.label, sx, o.y - s(44), '#8B0000', 'rgba(255,220,220,0.88)');
+        } else if (o.la > 0) {
           ctx.globalAlpha = o.la;
-          drawLabel(o.label, sx, o.y - s(44), '#8B0000', 'rgba(255,220,220,0.93)');
+          drawLabel(o.label, sx, o.y - s(44), '#8B0000', 'rgba(255,220,220,0.95)');
           ctx.globalAlpha = 1;
         }
       }
