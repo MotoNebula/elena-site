@@ -25,7 +25,7 @@
       <li><a href="#about">Обо мне</a></li>
       <li><a href="#method">Подход</a></li>
       <li><a href="#education">Образование</a></li>
-      <li><a href="#facts">О себе</a></li>
+
       <li><a href="#contacts" class="nav__cta">Написать</a></li>
     </ul>
   </div>
@@ -264,57 +264,6 @@
   </div>
 </section>
 
-<!-- FACTS -->
-<section class="section facts" id="facts">
-  <div class="container">
-    <h2>Немного обо мне</h2>
-    <div class="facts__grid">
-      <div class="fact">
-        <div class="fact__photo-wrap">
-          <img src="img/fact-fencing.jpg" alt="Фехтование" class="fact__photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="fact__icon-fallback">🤺</div>
-        </div>
-        <p>В подростковом возрасте занималась фехтованием и судила соревнования</p>
-      </div>
-      <div class="fact">
-        <div class="fact__photo-wrap">
-          <img src="img/fact-boat.jpg" alt="Яхта" class="fact__photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="fact__icon-fallback">⛵</div>
-        </div>
-        <p>Была матросом на яхте типа «кадет»</p>
-      </div>
-      <div class="fact">
-        <div class="fact__photo-wrap">
-          <img src="img/fact-dance.jpg" alt="Восточные танцы" class="fact__photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="fact__icon-fallback">💃</div>
-        </div>
-        <p>Выигрывала кубки по восточным танцам, готовилась в номинации фитнес-бикини — травма привела в йога-зал</p>
-      </div>
-      <div class="fact">
-        <div class="fact__photo-wrap">
-          <img src="img/fact-yoga-meditation.jpg" alt="Йога и медитация" class="fact__photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="fact__icon-fallback">🧘</div>
-        </div>
-        <p>С 2013 года изучаю духовные практики: випассана, йога, буддизм. Сертифицированный преподаватель йоги</p>
-      </div>
-      <div class="fact">
-        <div class="fact__photo-wrap">
-          <img src="img/fact-nepal-monks.jpg" alt="Непал" class="fact__photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="fact__icon-fallback">🙏</div>
-        </div>
-        <p>Обучалась внутренним буддийским практикам в Непале, интегрирую майндфулнес в повседневную жизнь и терапию</p>
-      </div>
-      <div class="fact">
-        <div class="fact__photo-wrap">
-          <img src="img/fact-nepal-stupa.jpg" alt="Исследование сознания" class="fact__photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="fact__icon-fallback">🔍</div>
-        </div>
-        <p>Мой главный интерес: как устроен человек и его сознание, как мир формирует психику и как это можно преодолеть. Благодаря своему исследовательскому интересу благополучно пережила экзистенциальный кризис.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- GALLERY -->
 <section class="section gallery" id="gallery">
   <div class="container">
@@ -530,14 +479,6 @@
 <!-- Motion.js: stagger entrances + spring buttons -->
 <script type="module">
 import { animate, inView, stagger } from 'https://cdn.jsdelivr.net/npm/motion@latest/+esm';
-
-// Stagger: факты
-inView('.facts__grid', () => {
-  animate('.facts__grid .fact',
-    { opacity: [0, 1], y: [32, 0] },
-    { delay: stagger(0.09), duration: 0.65, easing: [0.22, 1, 0.36, 1] }
-  );
-}, { margin: '-8% 0px' });
 
 // Stagger: образование
 inView('.edu-grid', () => {
