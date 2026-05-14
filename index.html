@@ -315,6 +315,22 @@
   </div>
 </section>
 
+<!-- GALLERY -->
+<section class="section gallery" id="gallery">
+  <div class="container">
+    <h2>Фотогалерея</h2>
+    <p class="gallery__sub">Немного из моей жизни</p>
+  </div>
+  <div class="carousel" id="carousel">
+    <div class="carousel__viewport">
+      <div class="carousel__track" id="carTrack"></div>
+      <button class="carousel__btn carousel__btn--prev" id="carPrev" aria-label="Предыдущее фото">&#8249;</button>
+      <button class="carousel__btn carousel__btn--next" id="carNext" aria-label="Следующее фото">&#8250;</button>
+    </div>
+    <div class="carousel__dots" id="carDots"></div>
+  </div>
+</section>
+
 <!-- CONTACTS -->
 <section class="section contacts" id="contacts">
   <!-- мягкое пятно и намёк на конверт -->
@@ -363,6 +379,93 @@
 </footer>
 
 <script src="mario.js"></script>
+<script>
+(function() {
+  var PHOTOS = [
+    { src: 'img/elena-about.jpg',                    cap: 'Елена Коновалова' },
+    { src: 'img/fact-fencing.jpg',                   cap: 'Фехтование — спорт подростковых лет' },
+    { src: 'img/fact-boat.jpg',                      cap: 'Матрос на яхте типа «Кадет»' },
+    { src: 'img/fact-dance.jpg',                     cap: 'Восточные танцы' },
+    { src: 'img/фитнес-бикини.jpg',                  cap: 'Подготовка в номинации фитнес-бикини' },
+    { src: 'img/fact-yoga-meditation.jpg',           cap: 'Медитация' },
+    { src: 'img/йога.jpg',                           cap: 'Йога' },
+    { src: 'img/йога1.jpg',                          cap: 'Йога' },
+    { src: 'img/йога2.jpg',                          cap: 'Йога' },
+    { src: 'img/fact-nepal-monks.jpg',               cap: 'Монахи в Непале' },
+    { src: 'img/fact-nepal-stupa.jpg',               cap: 'Ступа в Непале' },
+    { src: 'img/непал2.jpg',                         cap: 'Непал' },
+    { src: 'img/%D0%B2%D1%8B%D1%85%D0%BE%D0%B4%20%D0%B8%D0%B7%20%D0%BA%D1%80%D0%B8%D0%B7%D0%B8%D1%81%D0%B0.png', cap: 'Выход из кризиса' },
+  ];
+
+  var track  = document.getElementById('carTrack');
+  var dotsEl = document.getElementById('carDots');
+  if (!track || !dotsEl) return;
+
+  var cur = 0;
+  var timer;
+
+  PHOTOS.forEach(function(p, i) {
+    var slide = document.createElement('div');
+    slide.className = 'carousel__slide';
+
+    var img = document.createElement('img');
+    img.src = p.src;
+    img.alt = p.cap;
+    img.loading = i === 0 ? 'eager' : 'lazy';
+
+    var cap = document.createElement('div');
+    cap.className = 'carousel__caption';
+    cap.textContent = p.cap;
+
+    slide.appendChild(img);
+    slide.appendChild(cap);
+    track.appendChild(slide);
+
+    var dot = document.createElement('button');
+    dot.className = 'carousel__dot' + (i === 0 ? ' carousel__dot--active' : '');
+    dot.setAttribute('aria-label', 'Фото ' + (i + 1));
+    dot.addEventListener('click', function() { goTo(i); });
+    dotsEl.appendChild(dot);
+  });
+
+  function goTo(n) {
+    cur = ((n % PHOTOS.length) + PHOTOS.length) % PHOTOS.length;
+    track.style.transform = 'translateX(-' + cur * 100 + '%)';
+    var dots = dotsEl.querySelectorAll('.carousel__dot');
+    dots.forEach(function(d, i) {
+      d.classList.toggle('carousel__dot--active', i === cur);
+    });
+    resetTimer();
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(function() { goTo(cur + 1); }, 5000);
+  }
+
+  document.getElementById('carPrev').addEventListener('click', function() { goTo(cur - 1); });
+  document.getElementById('carNext').addEventListener('click', function() { goTo(cur + 1); });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft')  goTo(cur - 1);
+    if (e.key === 'ArrowRight') goTo(cur + 1);
+  });
+
+  var vp = document.querySelector('.carousel__viewport');
+  var tx = 0;
+  vp.addEventListener('touchstart', function(e) { tx = e.touches[0].clientX; }, { passive: true });
+  vp.addEventListener('touchend',   function(e) {
+    var dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) goTo(cur + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
+  var carousel = document.getElementById('carousel');
+  carousel.addEventListener('mouseenter', function() { clearInterval(timer); });
+  carousel.addEventListener('mouseleave', function() { resetTimer(); });
+
+  resetTimer();
+})();
+</script>
 <script>
   // Nav: burger + scroll state
   const burger = document.getElementById('burger');
