@@ -89,38 +89,53 @@
       ctx.fillRect(x + s(2)  + rOff, gy - s(23), s(8), s(16));
     }
 
+    /* red shirt body behind overalls */
+    ctx.fillStyle = '#CC2200';
+    ctx.fillRect(x - s(12), gy - s(40), s(24), s(18));
+
     /* overalls bib */
     ctx.fillStyle = '#1A3DAA';
     ctx.fillRect(x - s(8), gy - s(37), s(16), s(15));
 
-    /* shirt (arms/sides) */
+    /* arms (extended from shirt) */
     ctx.fillStyle = '#CC2200';
     if (jump) {
-      ctx.fillRect(x - s(18), gy - s(47), s(10), s(10));
-      ctx.fillRect(x + s(8),  gy - s(47), s(10), s(10));
+      ctx.fillRect(x - s(20), gy - s(49), s(10), s(10));
+      ctx.fillRect(x + s(10), gy - s(49), s(10), s(10));
     } else {
-      ctx.fillRect(x - s(15), gy - s(39), s(7), s(10));
-      ctx.fillRect(x + s(8),  gy - s(39), s(7), s(10));
+      ctx.fillRect(x - s(17), gy - s(40), s(7), s(10));
+      ctx.fillRect(x + s(10), gy - s(40), s(7), s(10));
     }
 
-    /* face */
-    ctx.fillStyle = '#FFBA78';
-    ctx.fillRect(x - s(8), gy - s(51), s(16), s(14));
+    /* face – warm skin tone, wider */
+    ctx.fillStyle = '#FCA86B';
+    ctx.fillRect(x - s(9), gy - s(52), s(17), s(15));
+
+    /* nose – protrudes to the right */
+    ctx.fillRect(x + s(5), gy - s(48), s(5), s(4));
 
     /* eyes */
     ctx.fillStyle = '#1A0A00';
-    ctx.fillRect(x - s(5), gy - s(48), s(4), s(4));
-    ctx.fillRect(x + s(1), gy - s(48), s(4), s(4));
+    ctx.fillRect(x - s(6), gy - s(50), s(4), s(4));
+    ctx.fillRect(x + s(1), gy - s(50), s(4), s(4));
 
-    /* mustache */
-    ctx.fillStyle = '#6B3A1F';
-    ctx.fillRect(x - s(7), gy - s(42), s(14), s(3));
+    /* mustache – bushy, three humps + wide base */
+    ctx.fillStyle = '#5C2200';
+    ctx.fillRect(x - s(8), gy - s(43), s(15), s(3)); /* base */
+    ctx.fillRect(x - s(7), gy - s(46), s(4),  s(3)); /* left hump */
+    ctx.fillRect(x - s(2), gy - s(46), s(4),  s(3)); /* middle hump */
+    ctx.fillRect(x + s(3), gy - s(46), s(4),  s(3)); /* right hump */
+
+    /* sideburns / hair below hat brim */
+    ctx.fillRect(x - s(9), gy - s(57), s(4), s(5));
+    ctx.fillRect(x + s(5), gy - s(57), s(4), s(5));
 
     /* hat brim */
     ctx.fillStyle = '#CC2200';
-    ctx.fillRect(x - s(12), gy - s(56), s(24), s(5));
-    /* hat crown */
-    ctx.fillRect(x - s(9),  gy - s(64), s(18), s(8));
+    ctx.fillRect(x - s(13), gy - s(57), s(26), s(5));
+
+    /* hat crown – taller */
+    ctx.fillRect(x - s(9), gy - s(70), s(18), s(13));
   }
 
   function drawGoomba(x, gy, squished) {
