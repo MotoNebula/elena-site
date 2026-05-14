@@ -688,12 +688,18 @@ p:last-child { margin-bottom: 0; }
   margin-bottom: 0;
 }
 .carousel {
-  max-width: 860px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 0 3.5rem;
+  padding: 0 1.5rem;
+}
+.carousel__row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 .carousel__viewport {
-  position: relative;
+  flex: 1;
+  min-width: 0;
   overflow: hidden;
   border-radius: 20px;
   box-shadow: 0 6px 36px rgba(0,0,0,0.13);
@@ -729,14 +735,12 @@ p:last-child { margin-bottom: 0; }
   pointer-events: none;
 }
 .carousel__btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 46px;
-  height: 46px;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   border: none;
-  background: rgba(255,255,255,0.88);
+  background: rgba(255,255,255,0.9);
   color: var(--clay-dark);
   font-size: 1.9rem;
   line-height: 1;
@@ -744,19 +748,16 @@ p:last-child { margin-bottom: 0; }
   box-shadow: 0 2px 14px rgba(0,0,0,0.16);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  transition: background 0.22s, color 0.22s, transform 0.22s;
-  z-index: 3;
+  transition: background 0.22s, color 0.22s, transform 0.18s;
   display: flex;
   align-items: center;
   justify-content: center;
   padding-bottom: 2px;
 }
-.carousel__btn--prev { left: -56px; }
-.carousel__btn--next { right: -56px; }
 .carousel__btn:hover {
   background: var(--clay);
   color: #fff;
-  transform: translateY(-50%) scale(1.1);
+  transform: scale(1.1);
 }
 .carousel__dots {
   display: flex;
@@ -826,9 +827,8 @@ p:last-child { margin-bottom: 0; }
   .facts__grid { grid-template-columns: repeat(2, 1fr); }
   .journey__legend { grid-template-columns: 1fr; }
 
-  .carousel { padding: 0 2.75rem; }
-  .carousel__btn--prev { left: -44px; }
-  .carousel__btn--next { right: -44px; }
+  .carousel { padding: 0 0.5rem; }
+  .carousel__row { gap: 0.5rem; }
 }
 
 @media (max-width: 540px) {
@@ -837,9 +837,8 @@ p:last-child { margin-bottom: 0; }
   .facts__grid { grid-template-columns: 1fr; }
   .method__grid { grid-template-columns: 1fr; }
 
-  .carousel { padding: 0 2.25rem; }
+  .carousel { padding: 0; }
+  .carousel__row { gap: 0.25rem; }
   .carousel__btn { width: 36px; height: 36px; font-size: 1.5rem; }
-  .carousel__btn--prev { left: -38px; }
-  .carousel__btn--next { right: -38px; }
   .carousel__caption { font-size: 0.9rem; }
 }
