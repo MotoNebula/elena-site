@@ -107,35 +107,35 @@
       ctx.fillRect(x + s(10), gy - s(40), s(7), s(10));
     }
 
-    /* face – warm skin tone, wider */
+    /* face – warm skin tone */
     ctx.fillStyle = '#FCA86B';
-    ctx.fillRect(x - s(9), gy - s(52), s(17), s(15));
+    ctx.fillRect(x - s(10), gy - s(55), s(20), s(18));
 
-    /* nose – protrudes to the right */
-    ctx.fillRect(x + s(5), gy - s(48), s(5), s(4));
+    /* nose – big protrusion to the right */
+    ctx.fillRect(x + s(7),  gy - s(50), s(6), s(5));
 
-    /* eyes */
+    /* eyes – large, prominent */
     ctx.fillStyle = '#1A0A00';
-    ctx.fillRect(x - s(6), gy - s(50), s(4), s(4));
-    ctx.fillRect(x + s(1), gy - s(50), s(4), s(4));
+    ctx.fillRect(x - s(7), gy - s(53), s(5), s(5));
+    ctx.fillRect(x + s(2), gy - s(53), s(5), s(5));
 
-    /* mustache – bushy, three humps + wide base */
+    /* mustache – very bushy: fat base + three big humps */
     ctx.fillStyle = '#5C2200';
-    ctx.fillRect(x - s(8), gy - s(43), s(15), s(3)); /* base */
-    ctx.fillRect(x - s(7), gy - s(46), s(4),  s(3)); /* left hump */
-    ctx.fillRect(x - s(2), gy - s(46), s(4),  s(3)); /* middle hump */
-    ctx.fillRect(x + s(3), gy - s(46), s(4),  s(3)); /* right hump */
+    ctx.fillRect(x - s(9), gy - s(44), s(17), s(5)); /* fat base */
+    ctx.fillRect(x - s(8), gy - s(49), s(5),  s(5)); /* left hump */
+    ctx.fillRect(x - s(2), gy - s(49), s(5),  s(5)); /* middle hump */
+    ctx.fillRect(x + s(4), gy - s(49), s(5),  s(5)); /* right hump */
 
     /* sideburns / hair below hat brim */
-    ctx.fillRect(x - s(9), gy - s(57), s(4), s(5));
-    ctx.fillRect(x + s(5), gy - s(57), s(4), s(5));
+    ctx.fillRect(x - s(10), gy - s(62), s(5), s(7));
+    ctx.fillRect(x + s(5),  gy - s(62), s(5), s(7));
 
-    /* hat brim */
+    /* hat brim – wide */
     ctx.fillStyle = '#CC2200';
-    ctx.fillRect(x - s(13), gy - s(57), s(26), s(5));
+    ctx.fillRect(x - s(14), gy - s(62), s(28), s(7));
 
-    /* hat crown – taller */
-    ctx.fillRect(x - s(9), gy - s(70), s(18), s(13));
+    /* hat crown – tall */
+    ctx.fillRect(x - s(10), gy - s(80), s(20), s(18));
   }
 
   function drawGoomba(x, gy, squished) {
