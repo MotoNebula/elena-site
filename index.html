@@ -11,6 +11,9 @@
 </head>
 <body>
 
+<!-- Прогресс скролла -->
+<div class="scroll-bar" aria-hidden="true"></div>
+
 <!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav__container">
@@ -361,14 +364,15 @@
 
 <script src="mario.js"></script>
 <script>
+  // Nav: burger + scroll state
   const burger = document.getElementById('burger');
   const navLinks = document.getElementById('navLinks');
   burger.addEventListener('click', () => navLinks.classList.toggle('nav__links--open'));
-
   window.addEventListener('scroll', () => {
     document.getElementById('nav').classList.toggle('nav--scrolled', window.scrollY > 50);
-  });
+  }, { passive: true });
 
+  // Smooth scroll + close burger
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
@@ -378,10 +382,94 @@
     });
   });
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fact, .edu-card, .method__card').forEach(el => observer.observe(el));
+  // Scroll progress bar
+  const scrollBar = document.querySelector('.scroll-bar');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    scrollBar.style.transform = `scaleX(${pct})`;
+  }, { passive: true });
+
+  // Active nav section highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navAs = document.querySelectorAll('.nav__links a[href^="#"]');
+  const sectionObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navAs.forEach(a => a.classList.toggle('nav__link--active', a.getAttribute('href') === `#${e.target.id}`));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => sectionObs.observe(s));
+
+  // Mouse parallax on hero hand
+  const heroZone = document.querySelector('.hero__inner');
+  const heroIllus = document.querySelector('.hero__illustration');
+  if (heroZone && heroIllus) {
+    let px = 0, py = 0, rafId;
+    heroZone.addEventListener('mousemove', e => {
+      const r = heroZone.getBoundingClientRect();
+      px = ((e.clientX - r.left) / r.width  - 0.5) * 22;
+      py = ((e.clientY - r.top)  / r.height - 0.5) * 14;
+    }, { passive: true });
+    heroZone.addEventListener('mouseleave', () => { px = 0; py = 0; });
+    (function lerp() {
+      const cur = heroIllus._px || 0, curY = heroIllus._py || 0;
+      const nx = cur + (px - cur) * 0.08, ny = curY + (py - curY) * 0.08;
+      heroIllus._px = nx; heroIllus._py = ny;
+      heroIllus.style.transform = `translate(${nx}px, ${ny}px)`;
+      requestAnimationFrame(lerp);
+    })();
+  }
+</script>
+
+<!-- Motion.js: stagger entrances + spring buttons -->
+<script type="module">
+import { animate, inView, stagger } from 'https://cdn.jsdelivr.net/npm/motion@latest/+esm';
+
+// Stagger: факты
+inView('.facts__grid', () => {
+  animate('.facts__grid .fact',
+    { opacity: [0, 1], y: [32, 0] },
+    { delay: stagger(0.09), duration: 0.65, easing: [0.22, 1, 0.36, 1] }
+  );
+}, { margin: '-8% 0px' });
+
+// Stagger: образование
+inView('.edu-grid', () => {
+  animate('.edu-grid .edu-card',
+    { opacity: [0, 1], y: [22, 0] },
+    { delay: stagger(0.06), duration: 0.55, easing: [0.22, 1, 0.36, 1] }
+  );
+}, { margin: '-8% 0px' });
+
+// Stagger: метод
+inView('.method__grid', () => {
+  animate('.method__card',
+    { opacity: [0, 1], y: [22, 0] },
+    { delay: stagger(0.12), duration: 0.6, easing: [0.22, 1, 0.36, 1] }
+  );
+}, { margin: '-8% 0px' });
+
+// About: слайд с разных сторон
+inView('.about__grid', () => {
+  animate('.about__visual', { opacity: [0, 1], x: [-28, 0] }, { duration: 0.75, easing: [0.22, 1, 0.36, 1] });
+  animate('.about__text',   { opacity: [0, 1], x: [ 28, 0] }, { delay: 0.1, duration: 0.75, easing: [0.22, 1, 0.36, 1] });
+}, { margin: '-5% 0px' });
+
+// Spring-кнопки: физический эйзинг на hover/click
+const SPRING = [0.34, 1.56, 0.64, 1];
+document.querySelectorAll('.btn--primary, .contact-btn').forEach(btn => {
+  btn.addEventListener('mouseenter', () => animate(btn, { scale: 1.05 }, { duration: 0.32, easing: SPRING }));
+  btn.addEventListener('mouseleave', () => animate(btn, { scale: 1   }, { duration: 0.38, easing: SPRING }));
+  btn.addEventListener('mousedown',  () => animate(btn, { scale: 0.96 }, { duration: 0.1 }));
+  btn.addEventListener('mouseup',    () => animate(btn, { scale: 1.05 }, { duration: 0.24, easing: SPRING }));
+});
+
+// Spring: теги метода
+document.querySelectorAll('.method__tag').forEach(tag => {
+  tag.addEventListener('mouseenter', () => animate(tag, { scale: 1.06, y: -2 }, { duration: 0.28, easing: SPRING }));
+  tag.addEventListener('mouseleave', () => animate(tag, { scale: 1,    y:  0 }, { duration: 0.32, easing: SPRING }));
+});
 </script>
 </body>
 </html>
