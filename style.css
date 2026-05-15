@@ -11,7 +11,8 @@
   --text-muted: #7A7470;
   --card-bg: #FFFFFF;
   --border: #E8E0D4;
-  --ff-display: 'Cormorant Garamond', Georgia, serif;
+  --ff-display: 'Great Vibes', 'Cormorant Garamond', Georgia, serif;
+  --ff-serif: 'Cormorant Garamond', Georgia, serif;
   --ff-body: 'Lora', Georgia, serif;
   --ff-ui: system-ui, -apple-system, sans-serif;
   --radius: 14px;
@@ -45,8 +46,8 @@ a { color: inherit; }
 
 /* ── TYPOGRAPHY ── */
 h1, h2, h3 { font-family: var(--ff-display); font-weight: 400; line-height: 1.15; }
-h2 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); color: var(--text); margin-bottom: 1.25rem; }
-h3 { font-size: 1.15rem; }
+h2 { font-size: clamp(2.6rem, 6vw, 4rem); color: var(--text); margin-bottom: 1.25rem; }
+h3 { font-size: 1.25rem; font-family: var(--ff-serif); }
 p { font-size: 1rem; color: var(--text); margin-bottom: 0.9rem; line-height: 1.75; }
 p:last-child { margin-bottom: 0; }
 
@@ -673,16 +674,26 @@ p:last-child { margin-bottom: 0; }
   object-position: top center;
   display: block;
 }
-.carousel__caption {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 2.5rem 1.5rem 1.25rem;
-  background: linear-gradient(to top, rgba(42,39,36,0.58) 0%, transparent 100%);
-  color: #fff;
-  font-family: var(--ff-display);
+.gallery__cap {
+  max-width: 860px;
+  margin: 1.5rem auto 0;
+  padding: 0 1.5rem;
+  text-align: center;
+  min-height: 4.5rem;
+}
+.gallery__cap-title {
+  font-family: var(--ff-serif);
+  font-size: 1.1rem;
   font-style: italic;
-  font-size: 1.05rem;
-  pointer-events: none;
+  color: var(--clay);
+  margin-bottom: 0.35rem;
+}
+.gallery__cap-detail {
+  font-family: var(--ff-body);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
 }
 .carousel__btn {
   flex-shrink: 0;

@@ -31,25 +31,21 @@
   resize();
   window.addEventListener('resize', resize);
 
-  /* ── state ── */
   let worldX   = 0;
   let tick     = 0;
   let walkF    = 0;
-  let marioY   = 0; // offset from GROUND (<=0)
+  let marioY   = 0;
   let marioVY  = 0;
   let jumping  = false;
   let objects  = [];
   let nextSpawn = 80;
   let spawnCoin = true;
 
-  /* ── cloud seed (parallax) ── */
   const CLOUDS = Array.from({ length: 6 }, (_, i) => ({
     x: i * 520 + Math.random() * 180,
     y: 0.08 + Math.random() * 0.35,
     sc: 0.65 + Math.random() * 0.55,
   }));
-
-  /* ─────────────────────── DRAW HELPERS ─────────────────────── */
 
   function s(n) { return n * Math.max(1.3, H / 220); }
 
@@ -64,78 +60,85 @@
     ctx.fill();
   }
 
+  /* ── NES-style Mario sprite ── */
   function drawMario(x, gy, frame, jump) {
-    /* feet baseline = gy */
     const lOff = jump ? 0 : (frame === 1 ? -s(3) : frame === 2 ? s(3) : 0);
     const rOff = -lOff;
 
     /* shoes */
     ctx.fillStyle = '#3B1F07';
     if (jump) {
-      ctx.fillRect(x - s(13), gy - s(8),  s(12), s(7));
-      ctx.fillRect(x + s(1),  gy - s(13), s(12), s(7));
+      ctx.fillRect(x - s(12), gy - s(7),  s(11), s(6));
+      ctx.fillRect(x + s(1),  gy - s(11), s(11), s(6));
     } else {
-      ctx.fillRect(x - s(14) + lOff, gy - s(7), s(13), s(7));
-      ctx.fillRect(x + s(1)  + rOff, gy - s(7), s(13), s(7));
+      ctx.fillRect(x - s(13) + lOff, gy - s(6), s(11), s(6));
+      ctx.fillRect(x + s(2)  + rOff, gy - s(6), s(11), s(6));
     }
 
-    /* legs */
-    ctx.fillStyle = '#1A3DAA';
+    /* legs – dark overalls */
+    ctx.fillStyle = '#7B2600';
     if (jump) {
-      ctx.fillRect(x - s(10), gy - s(22), s(8), s(14));
-      ctx.fillRect(x + s(2),  gy - s(27), s(8), s(14));
+      ctx.fillRect(x - s(9), gy - s(18), s(8), s(11));
+      ctx.fillRect(x + s(2), gy - s(23), s(8), s(12));
     } else {
-      ctx.fillRect(x - s(10) + lOff, gy - s(23), s(8), s(16));
-      ctx.fillRect(x + s(2)  + rOff, gy - s(23), s(8), s(16));
+      ctx.fillRect(x - s(9) + lOff, gy - s(21), s(8), s(15));
+      ctx.fillRect(x + s(2) + rOff, gy - s(21), s(8), s(15));
     }
 
-    /* red shirt body behind overalls */
+    /* body – red shirt */
     ctx.fillStyle = '#CC2200';
-    ctx.fillRect(x - s(12), gy - s(40), s(24), s(18));
+    ctx.fillRect(x - s(10), gy - s(34), s(20), s(14));
 
     /* overalls bib */
-    ctx.fillStyle = '#1A3DAA';
-    ctx.fillRect(x - s(8), gy - s(37), s(16), s(15));
+    ctx.fillStyle = '#7B2600';
+    ctx.fillRect(x - s(7), gy - s(33), s(14), s(10));
 
-    /* arms (extended from shirt) */
+    /* arms */
     ctx.fillStyle = '#CC2200';
     if (jump) {
-      ctx.fillRect(x - s(20), gy - s(49), s(10), s(10));
-      ctx.fillRect(x + s(10), gy - s(49), s(10), s(10));
+      ctx.fillRect(x - s(20), gy - s(43), s(11), s(8));
+      ctx.fillRect(x + s(9),  gy - s(43), s(11), s(8));
     } else {
-      ctx.fillRect(x - s(17), gy - s(40), s(7), s(10));
-      ctx.fillRect(x + s(10), gy - s(40), s(7), s(10));
+      ctx.fillRect(x - s(17), gy - s(34), s(7), s(8));
+      ctx.fillRect(x + s(10), gy - s(34), s(7), s(8));
     }
 
-    /* face – warm skin tone */
+    /* hands – skin */
     ctx.fillStyle = '#FCA86B';
-    ctx.fillRect(x - s(10), gy - s(55), s(20), s(18));
+    if (jump) {
+      ctx.fillRect(x - s(22), gy - s(45), s(4), s(4));
+      ctx.fillRect(x + s(18), gy - s(45), s(4), s(4));
+    }
 
-    /* nose – big protrusion to the right */
-    ctx.fillRect(x + s(7),  gy - s(50), s(6), s(5));
+    /* face */
+    ctx.fillStyle = '#FCA86B';
+    ctx.fillRect(x - s(8), gy - s(47), s(15), s(13));
 
-    /* eyes – large, prominent */
+    /* nose */
+    ctx.fillRect(x + s(5), gy - s(44), s(4), s(3));
+
+    /* eyes */
     ctx.fillStyle = '#1A0A00';
-    ctx.fillRect(x - s(7), gy - s(53), s(5), s(5));
-    ctx.fillRect(x + s(2), gy - s(53), s(5), s(5));
+    ctx.fillRect(x - s(5), gy - s(45), s(3), s(3));
+    ctx.fillRect(x + s(1), gy - s(45), s(3), s(3));
 
-    /* mustache – very bushy: fat base + three big humps */
+    /* mustache: base + 3 bumps */
     ctx.fillStyle = '#5C2200';
-    ctx.fillRect(x - s(9), gy - s(44), s(17), s(5)); /* fat base */
-    ctx.fillRect(x - s(8), gy - s(49), s(5),  s(5)); /* left hump */
-    ctx.fillRect(x - s(2), gy - s(49), s(5),  s(5)); /* middle hump */
-    ctx.fillRect(x + s(4), gy - s(49), s(5),  s(5)); /* right hump */
+    ctx.fillRect(x - s(7), gy - s(38), s(13), s(3));
+    ctx.fillRect(x - s(6), gy - s(41), s(4),  s(3));
+    ctx.fillRect(x - s(1), gy - s(41), s(4),  s(3));
+    ctx.fillRect(x + s(4), gy - s(41), s(3),  s(3));
 
-    /* sideburns / hair below hat brim */
-    ctx.fillRect(x - s(10), gy - s(62), s(5), s(7));
-    ctx.fillRect(x + s(5),  gy - s(62), s(5), s(7));
+    /* sideburns */
+    ctx.fillRect(x - s(8), gy - s(51), s(3), s(4));
+    ctx.fillRect(x + s(5), gy - s(51), s(3), s(4));
 
-    /* hat brim – wide */
+    /* hat brim */
     ctx.fillStyle = '#CC2200';
-    ctx.fillRect(x - s(14), gy - s(62), s(28), s(7));
+    ctx.fillRect(x - s(11), gy - s(51), s(22), s(4));
 
-    /* hat crown – tall */
-    ctx.fillRect(x - s(10), gy - s(80), s(20), s(18));
+    /* hat crown */
+    ctx.fillRect(x - s(8), gy - s(63), s(16), s(12));
   }
 
   function drawGoomba(x, gy, squished) {
@@ -145,46 +148,48 @@
       ctx.ellipse(x, gy - s(4), s(20), s(4), 0, 0, Math.PI * 2);
       ctx.fill();
     } else {
-      /* body */
       ctx.fillStyle = '#8B4513';
       ctx.beginPath();
       ctx.ellipse(x, gy - s(18), s(18), s(18), 0, 0, Math.PI * 2);
       ctx.fill();
-      /* whites */
       ctx.fillStyle = '#fff';
       ctx.beginPath(); ctx.ellipse(x - s(6), gy - s(22), s(5), s(5.5), 0, 0, Math.PI * 2); ctx.fill();
       ctx.beginPath(); ctx.ellipse(x + s(6), gy - s(22), s(5), s(5.5), 0, 0, Math.PI * 2); ctx.fill();
-      /* pupils */
       ctx.fillStyle = '#1A0A00';
       ctx.beginPath(); ctx.ellipse(x - s(5), gy - s(22), s(3), s(3.5), 0, 0, Math.PI * 2); ctx.fill();
       ctx.beginPath(); ctx.ellipse(x + s(5), gy - s(22), s(3), s(3.5), 0, 0, Math.PI * 2); ctx.fill();
-      /* angry brows */
       ctx.strokeStyle = '#1A0A00';
       ctx.lineWidth = s(1.5);
       ctx.beginPath(); ctx.moveTo(x - s(11), gy - s(28)); ctx.lineTo(x - s(1), gy - s(25)); ctx.stroke();
       ctx.beginPath(); ctx.moveTo(x + s(1),  gy - s(25)); ctx.lineTo(x + s(11), gy - s(28)); ctx.stroke();
-      /* feet */
       ctx.fillStyle = '#5C2E0A';
       ctx.fillRect(x - s(20), gy - s(7), s(14), s(7));
       ctx.fillRect(x + s(6),  gy - s(7), s(14), s(7));
     }
   }
 
+  /* brick block – no "?" */
   function drawBlock(x, y, bumped) {
-    const off = bumped ? -s(7) : 0;
-    const bx = x - s(18), by = y + off, bw = s(36), bh = s(36);
+    const off = bumped ? -s(6) : 0;
+    const bx = x - s(16), by = y + off, bw = s(32), bh = s(32);
 
-    ctx.fillStyle = bumped ? '#7A5E00' : '#C8920A';
+    ctx.fillStyle = bumped ? '#5C4500' : '#C8920A';
     ctx.fillRect(bx, by, bw, bh);
 
-    ctx.fillStyle = bumped ? '#5C4500' : '#DDA800';
-    ctx.fillRect(bx + 3, by + 3, bw - 6, bh - 6);
+    ctx.fillStyle = bumped ? '#7A5E00' : '#E8B020';
+    ctx.fillRect(bx + s(2), by + s(2), bw - s(4), bh - s(4));
 
-    ctx.fillStyle = bumped ? '#4A3800' : '#8B6200';
-    ctx.font = `bold ${s(18)}px Inter, sans-serif`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(bumped ? '!' : '?', x, by + bh / 2);
+    /* brick lines */
+    ctx.fillStyle = bumped ? '#4A3800' : '#9A6A05';
+    ctx.fillRect(bx + s(2), by + bh * 0.5, bw - s(4), s(2));
+    ctx.fillRect(bx + bw * 0.5, by + s(2), s(2), bh * 0.5 - s(2));
+    ctx.fillRect(bx + bw * 0.25, by + bh * 0.5 + s(2), s(2), bh * 0.5 - s(2));
+    ctx.fillRect(bx + bw * 0.75, by + bh * 0.5 + s(2), s(2), bh * 0.5 - s(2));
+
+    /* top highlight */
+    ctx.fillStyle = 'rgba(255,255,255,0.22)';
+    ctx.fillRect(bx, by, bw, s(2));
+    ctx.fillRect(bx, by, s(2), bh);
   }
 
   function drawCoin(x, y, alpha) {
@@ -231,7 +236,6 @@
     ctx.textBaseline = 'middle';
     const tw = ctx.measureText(text).width;
     const pw = tw + s(14), ph = s(22);
-
     ctx.fillStyle = bg;
     fillRR(x - pw / 2, y - ph / 2, pw, ph, s(5));
     ctx.fillStyle = textColor;
@@ -248,26 +252,22 @@
   }
 
   function drawBackground() {
-    /* blue sky */
     const g = ctx.createLinearGradient(0, 0, 0, GROUND);
-    g.addColorStop(0,   '#5BB8E8');
-    g.addColorStop(1,   '#B8DEFF');
+    g.addColorStop(0, '#5BB8E8');
+    g.addColorStop(1, '#B8DEFF');
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, W, H);
 
-    /* parallax clouds */
     for (const cl of CLOUDS) {
       const cx = ((cl.x - worldX * 0.18) % (W + 220) + W + 220) % (W + 220) - 110;
       drawCloud(cx, cl.y * GROUND, cl.sc);
     }
 
-    /* green ground */
     ctx.fillStyle = '#4A9C2E';
     ctx.fillRect(0, GROUND, W, H - GROUND);
     ctx.fillStyle = '#3A7D20';
     ctx.fillRect(0, GROUND, W, 5);
 
-    /* brick lines on ground */
     const bw = 70, bh = 18;
     ctx.strokeStyle = 'rgba(0,0,0,0.08)';
     ctx.lineWidth = 1;
@@ -280,56 +280,39 @@
     }
   }
 
-  /* ─────────────────────── SPAWN ─────────────────────────── */
-
+  /* ── SPAWN ── */
   function spawnObject() {
     if (spawnCoin) {
       objects.push({
         type: 'block',
         wx: worldX + W + 40,
-        y: GROUND - s(80) - Math.random() * s(30),
+        /* higher – Mario needs to jump to reach */
+        y: GROUND - s(105) - Math.random() * s(20),
         state: 'idle',
         bumpT: 0,
         label: POSITIVE[posI++ % POSITIVE.length],
         coin: null,
+        jumpReady: false,
       });
     } else {
       const isRock = Math.random() > 0.45;
       const label  = NEGATIVE[negI++ % NEGATIVE.length];
       if (isRock) {
-        objects.push({
-          type: 'rock',
-          wx: worldX + MARIO_X + s(160),
-          y: s(15),
-          vy: 1.6,
-          state: 'falling',
-          label,
-          la: 0, lt: 0,
-        });
+        objects.push({ type: 'rock',   wx: worldX + MARIO_X + s(160), y: s(15), vy: 1.6, state: 'falling', label, la: 0, lt: 0 });
       } else {
-        objects.push({
-          type: 'goomba',
-          wx: worldX + W + 40,
-          y: GROUND,
-          state: 'walk',
-          st: 0,
-          label,
-          la: 0,
-        });
+        objects.push({ type: 'goomba', wx: worldX + W + 40,            y: GROUND, state: 'walk', st: 0, label, la: 0 });
       }
     }
     spawnCoin = !spawnCoin;
     nextSpawn = worldX + SPAWN_INTERVAL + Math.random() * 100;
   }
 
-  /* ─────────────────────── UPDATE ─────────────────────────── */
-
+  /* ── UPDATE ── */
   function update() {
     tick++;
     worldX += 2.5;
     if (tick % 8 === 0) walkF = (walkF + 1) % 3;
 
-    /* mario physics */
     if (jumping) {
       marioY  += marioVY;
       marioVY += 0.55;
@@ -342,10 +325,25 @@
       const sx = o.wx - worldX;
 
       if (o.type === 'block') {
-        if (o.state === 'idle' && Math.abs(sx - MARIO_X) < s(30)) {
-          o.state = 'bumped';
-          o.coin = { y: o.y - s(15), vy: -s(4), la: 1 };
+        /* trigger jump when block is ahead at the right distance */
+        if (o.state === 'idle' && !o.jumpReady && !jumping) {
+          const ahead = sx - MARIO_X;
+          if (ahead > s(38) && ahead < s(60)) {
+            jumping = true;
+            marioVY = -s(8);
+            o.jumpReady = true;
+          }
         }
+
+        /* head-hit detection: near jump peak, horizontally close */
+        if (o.state === 'idle' && jumping && marioVY >= -s(1.5) && marioVY < s(3)) {
+          if (Math.abs(sx - MARIO_X) < s(28)) {
+            o.state = 'bumped';
+            o.bumpT = 0;
+            o.coin  = { y: o.y - s(12), vy: -s(4.5), la: 1 };
+          }
+        }
+
         if (o.state === 'bumped') o.bumpT++;
         if (o.coin) {
           o.coin.y  += o.coin.vy;
@@ -392,8 +390,7 @@
     });
   }
 
-  /* ─────────────────────── DRAW ───────────────────────────── */
-
+  /* ── DRAW ── */
   function draw() {
     ctx.clearRect(0, 0, W, H);
     drawBackground();
@@ -404,14 +401,15 @@
 
       if (o.type === 'block') {
         drawBlock(sx, o.y, o.state === 'bumped');
+        /* label below block while idle */
         if (o.state === 'idle') {
-          drawLabel(o.label, sx, o.y - s(54), '#1B6B2E', 'rgba(255,255,255,0.82)');
+          drawLabel(o.label, sx, o.y + s(48), '#1B6B2E', 'rgba(255,255,255,0.82)');
         }
         if (o.coin) {
           drawCoin(sx, o.coin.y, o.coin.la);
           if (o.coin.la > 0.2) {
             ctx.globalAlpha = Math.min(1, o.coin.la * 1.5);
-            drawLabel(o.label, sx, o.coin.y - s(24), '#1B6B2E', 'rgba(255,255,255,0.95)');
+            drawLabel(o.label, sx, o.coin.y - s(22), '#1B6B2E', 'rgba(255,255,255,0.95)');
             ctx.globalAlpha = 1;
           }
         }
@@ -443,26 +441,16 @@
     drawMario(MARIO_X, GROUND + marioY, walkF, jumping);
   }
 
-  /* ─────────────────────── LOOP ───────────────────────────── */
-
+  /* ── LOOP ── */
   let raf = null;
   let running = false;
 
-  function loop() {
-    update();
-    draw();
-    raf = requestAnimationFrame(loop);
-  }
+  function loop() { update(); draw(); raf = requestAnimationFrame(loop); }
 
   const io = new IntersectionObserver(entries => {
     for (const e of entries) {
-      if (e.isIntersecting && !running) {
-        running = true;
-        loop();
-      } else if (!e.isIntersecting && running) {
-        running = false;
-        cancelAnimationFrame(raf);
-      }
+      if (e.isIntersecting && !running) { running = true; loop(); }
+      else if (!e.isIntersecting && running) { running = false; cancelAnimationFrame(raf); }
     }
   }, { threshold: 0.1 });
 

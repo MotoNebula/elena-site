@@ -6,7 +6,7 @@
   <title>Коновалова Елена | Психолог</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -280,6 +280,10 @@
     </div>
     <div class="carousel__dots" id="carDots"></div>
   </div>
+  <div class="gallery__cap">
+    <p class="gallery__cap-title" id="carCapTitle"></p>
+    <p class="gallery__cap-detail" id="carCapDetail"></p>
+  </div>
 </section>
 
 <!-- CONTACTS -->
@@ -333,21 +337,42 @@
 <script>
 (function() {
   var PHOTOS = [
-    { src: 'img/fact-fencing.jpg',                   cap: 'Фехтование — спорт подростковых лет' },
-    { src: 'img/fact-boat.jpg',                      cap: 'Матрос на яхте типа «Кадет»' },
-    { src: 'img/fact-dance.jpg',                     cap: 'Восточные танцы' },
-    { src: 'img/фитнес-бикини.jpg',                  cap: 'Подготовка в номинации фитнес-бикини' },
-    { src: 'img/йога.jpg',                           cap: 'Йога' },
-    { src: 'img/йога1.jpg',                          cap: 'Йога' },
-    { src: 'img/йога2.jpg',                          cap: 'Йога' },
-    { src: 'img/fact-nepal-monks.jpg',               cap: 'Монахи в Непале' },
-    { src: 'img/fact-nepal-stupa.jpg',               cap: 'Ступа в Непале' },
-    { src: 'img/непал2.jpg',                         cap: 'Непал' },
-    { src: 'img/%D0%B2%D1%8B%D1%85%D0%BE%D0%B4%20%D0%B8%D0%B7%20%D0%BA%D1%80%D0%B8%D0%B7%D0%B8%D1%81%D0%B0.png', cap: 'Выход из кризиса' },
+    { src: 'img/fact-fencing.jpg',
+      title: 'Фехтование',
+      detail: 'В подростковом возрасте занималась фехтованием и судила соревнования' },
+    { src: 'img/fact-dance.jpg',
+      title: 'Восточные танцы',
+      detail: 'Выигрывала кубки по восточным танцам — этот путь привёл к йоге и телесным практикам' },
+    { src: 'img/фитнес-бикини.jpg',
+      title: 'Фитнес-бикини',
+      detail: 'Готовилась к соревнованиям в номинации фитнес-бикини — травма стала поворотным моментом' },
+    { src: 'img/йога.jpg',
+      title: 'Йога',
+      detail: 'С 2013 года изучаю духовные практики: випассана, йога, буддизм. Сертифицированный преподаватель йоги' },
+    { src: 'img/йога1.jpg',
+      title: 'Практика йоги',
+      detail: 'Регулярная практика как путь к интеграции тела, ума и эмоций' },
+    { src: 'img/йога2.jpg',
+      title: 'Йога и осознанность',
+      detail: 'Преподавание йоги и личная практика как основа психологической работы' },
+    { src: 'img/fact-nepal-monks.jpg',
+      title: 'Непал — встреча с монахами',
+      detail: 'Обучалась внутренним буддийским практикам в Непале. Майндфулнес интегрирую в повседневную жизнь и терапию' },
+    { src: 'img/fact-nepal-stupa.jpg',
+      title: 'Боднатх, Непал',
+      detail: 'Ступа Боднатх — одно из священных мест буддизма. Место силы, медитации и глубокого погружения в себя' },
+    { src: 'img/непал2.jpg',
+      title: 'Непал',
+      detail: 'Путешествие в Непал как часть духовного пути и исследования природы сознания' },
+    { src: 'img/%D0%B2%D1%8B%D1%85%D0%BE%D0%B4%20%D0%B8%D0%B7%20%D0%BA%D1%80%D0%B8%D0%B7%D0%B8%D1%81%D0%B0.png',
+      title: 'Выход из кризиса',
+      detail: 'Благодаря исследовательскому интересу к устройству человека и сознания — благополучно пережила собственный экзистенциальный кризис' },
   ];
 
-  var track  = document.getElementById('carTrack');
-  var dotsEl = document.getElementById('carDots');
+  var track      = document.getElementById('carTrack');
+  var dotsEl     = document.getElementById('carDots');
+  var capTitle   = document.getElementById('carCapTitle');
+  var capDetail  = document.getElementById('carCapDetail');
   if (!track || !dotsEl) return;
 
   var cur = 0;
@@ -359,15 +384,10 @@
 
     var img = document.createElement('img');
     img.src = p.src;
-    img.alt = p.cap;
+    img.alt = p.title;
     img.loading = i === 0 ? 'eager' : 'lazy';
 
-    var cap = document.createElement('div');
-    cap.className = 'carousel__caption';
-    cap.textContent = p.cap;
-
     slide.appendChild(img);
-    slide.appendChild(cap);
     track.appendChild(slide);
 
     var dot = document.createElement('button');
@@ -377,6 +397,11 @@
     dotsEl.appendChild(dot);
   });
 
+  function updateCaption() {
+    if (capTitle)  capTitle.textContent  = PHOTOS[cur].title;
+    if (capDetail) capDetail.textContent = PHOTOS[cur].detail;
+  }
+
   function goTo(n) {
     cur = ((n % PHOTOS.length) + PHOTOS.length) % PHOTOS.length;
     track.style.transform = 'translateX(-' + cur * 100 + '%)';
@@ -384,8 +409,11 @@
     dots.forEach(function(d, i) {
       d.classList.toggle('carousel__dot--active', i === cur);
     });
+    updateCaption();
     resetTimer();
   }
+
+  updateCaption();
 
   function resetTimer() {
     clearInterval(timer);
