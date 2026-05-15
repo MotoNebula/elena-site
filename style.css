@@ -239,70 +239,14 @@ p:last-child { margin-bottom: 0; }
   pointer-events: none;
 }
 
-/* ── СЛОВА-ОБРАЗЫ ── */
-.hero__words {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-}
-.hw {
-  position: absolute;
-  font-family: var(--ff-serif);
-  font-style: italic;
-  font-weight: 300;
-  color: var(--on-dark);
-  user-select: none;
-  animation: driftWord ease-in-out infinite;
-}
-.hw--1 {
-  top: 11%; left: 3%;
-  font-size: clamp(1.5rem, 3.5vw, 2.8rem);
-  opacity: 0.09;
-  filter: blur(0.4px);
-  animation-duration: 18s;
-}
-.hw--2 {
-  top: 62%; left: 5%;
-  font-size: clamp(3rem, 6.5vw, 5.5rem);
-  opacity: 0.038;
-  filter: blur(3.5px);
-  animation-duration: 23s;
-  animation-delay: -7s;
-}
-.hw--3 {
-  top: 7%; right: 3%;
-  font-size: clamp(1rem, 2.2vw, 1.9rem);
-  opacity: 0.13;
-  filter: blur(0px);
-  animation-duration: 15s;
-  animation-delay: -3s;
-}
-.hw--4 {
-  top: 74%; right: 6%;
-  font-size: clamp(3.5rem, 7.5vw, 6.5rem);
-  opacity: 0.028;
-  filter: blur(4.5px);
-  animation-duration: 26s;
-  animation-delay: -12s;
-}
-.hw--5 {
-  top: 33%; left: 0%;
-  font-size: clamp(0.85rem, 1.8vw, 1.45rem);
-  opacity: 0.07;
-  filter: blur(1px);
-  animation-duration: 20s;
-  animation-delay: -5s;
-}
-.hw--6 {
-  top: 44%; right: 0%;
-  font-size: clamp(1.2rem, 2.8vw, 2.3rem);
-  opacity: 0.065;
-  filter: blur(0.6px);
-  animation-duration: 17s;
-  animation-delay: -9s;
-}
+/* ── СЛОВА-ОБРАЗЫ В SVG ── */
+.hw-svg { animation: driftWord ease-in-out infinite; }
+.hw-svg--1 { animation-duration: 18s; }
+.hw-svg--2 { animation-duration: 23s; animation-delay: -7s; }
+.hw-svg--3 { animation-duration: 15s; animation-delay: -3s; }
+.hw-svg--4 { animation-duration: 26s; animation-delay: -12s; }
+.hw-svg--5 { animation-duration: 20s; animation-delay: -5s; }
+.hw-svg--6 { animation-duration: 17s; animation-delay: -9s; }
 
 .hero__inner {
   flex: 1;
@@ -320,12 +264,13 @@ p:last-child { margin-bottom: 0; }
 
 .hero__eyebrow {
   font-family: var(--ff-display);
-  font-size: 1.35rem;
+  font-size: clamp(2rem, 5vw, 3.2rem);
   font-style: italic;
   color: var(--gold-dim);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
   font-weight: 300;
   animation: fadeSlideUp 0.7s 0.05s ease both;
+  line-height: 1.2;
 }
 .hero__name {
   font-family: var(--ff-serif);
