@@ -17,7 +17,6 @@
 <!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav__container">
-    <a href="#hero" class="nav__logo">Елена Коновалова</a>
     <button class="nav__burger" id="burger" aria-label="Меню">
       <span></span><span></span><span></span>
     </button>
@@ -33,26 +32,14 @@
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <!-- Тонкие линии, сходящиеся к ладони, и фоновые акценты -->
-  <div class="hero__deco" aria-hidden="true">
-    <svg viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <line x1="-20" y1="160" x2="1000" y2="360" stroke="#C8917A" stroke-width="0.8" opacity="0.11"/>
-      <line x1="-20" y1="270" x2="1000" y2="360" stroke="#C8917A" stroke-width="0.7" opacity="0.08"/>
-      <line x1="-20" y1="440" x2="1000" y2="360" stroke="#C8917A" stroke-width="0.7" opacity="0.08"/>
-      <line x1="-20" y1="540" x2="1000" y2="360" stroke="#C8917A" stroke-width="0.5" opacity="0.06"/>
-      <circle cx="130" cy="210" r="3" fill="#C8917A" opacity="0.22"/>
-      <circle cx="300" cy="470" r="2.5" fill="#8A9E7E" opacity="0.22"/>
-      <circle cx="70" cy="390" r="6" fill="#FCDEC8" opacity="0.45"/>
-      <circle cx="470" cy="140" r="2" fill="#C8917A" opacity="0.18"/>
-      <circle cx="600" cy="550" r="4" fill="#8A9E7E" opacity="0.15"/>
-      <text x="55" y="600" fill="#8A9E7E" opacity="0.055" font-size="20" font-family="Georgia, serif" font-style="italic">опора</text>
-      <text x="210" y="130" fill="#C8917A" opacity="0.055" font-size="16" font-family="Georgia, serif" font-style="italic">принятие</text>
-      <text x="380" y="580" fill="#8A9E7E" opacity="0.045" font-size="14" font-family="Georgia, serif" font-style="italic">исцеление</text>
-      <!-- листья внизу слева -->
-      <path d="M 18,618 Q 58,575 98,618 Q 58,660 18,618 Z" fill="#8A9E7E" opacity="0.14"/>
-      <path d="M 68,662 Q 112,618 152,662 Q 112,706 68,662 Z" fill="#8A9E7E" opacity="0.09"/>
-      <path d="M 35,660 Q 65,628 95,660 Q 65,692 35,660 Z" fill="#8A9E7E" opacity="0.07"/>
-    </svg>
+  <!-- Атмосферные слова-образы на разных глубинах -->
+  <div class="hero__words" aria-hidden="true">
+    <span class="hw hw--1">тревога</span>
+    <span class="hw hw--2">травма</span>
+    <span class="hw hw--3">выгорание</span>
+    <span class="hw hw--4">кризис</span>
+    <span class="hw hw--5">зависимость</span>
+    <span class="hw hw--6">сепарация</span>
   </div>
 
   <div class="hero__inner">
@@ -69,22 +56,9 @@
       <svg class="hand-svg" viewBox="-45 -35 385 460" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <filter id="hand-glow" x="-25%" y="-25%" width="150%" height="150%">
-            <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#C4A882" flood-opacity="0.28"/>
+            <feDropShadow dx="0" dy="8" stdDeviation="18" flood-color="#C49A3C" flood-opacity="0.16"/>
           </filter>
         </defs>
-
-        <!-- плашки вокруг ладони -->
-        <rect x="-42" y="52" width="72" height="22" rx="11" fill="#FCDEC8"/>
-        <text x="-6" y="67" text-anchor="middle" fill="#7A5A3A" font-size="11" font-family="Inter, system-ui, sans-serif">травма</text>
-
-        <rect x="220" y="28" width="92" height="22" rx="11" fill="#D8ECD4"/>
-        <text x="266" y="43" text-anchor="middle" fill="#3D6235" font-size="11" font-family="Inter, system-ui, sans-serif">выгорание</text>
-
-        <rect x="-42" y="198" width="96" height="22" rx="11" fill="#FCDEC8"/>
-        <text x="6" y="213" text-anchor="middle" fill="#7A5A3A" font-size="11" font-family="Inter, system-ui, sans-serif">зависимость</text>
-
-        <rect x="230" y="214" width="84" height="22" rx="11" fill="#D8ECD4"/>
-        <text x="272" y="229" text-anchor="middle" fill="#3D6235" font-size="11" font-family="Inter, system-ui, sans-serif">сепарация</text>
 
         <!-- ладонь -->
         <g filter="url(#hand-glow)">
@@ -99,16 +73,13 @@
         <path d="M 82,218 Q 148,202 222,220" stroke="#C4986A" stroke-width="1.2" fill="none" opacity="0.22" stroke-linecap="round"/>
         <path d="M 88,248 Q 148,234 216,250" stroke="#C4986A" stroke-width="1" fill="none" opacity="0.18" stroke-linecap="round"/>
 
-        <!-- слова внутри ладони -->
-        <text x="148" y="200" text-anchor="middle" fill="#7A5A3A" font-size="15" font-style="italic" font-family="Cormorant Garamond, Georgia, serif">тревога</text>
-        <text x="148" y="258" text-anchor="middle" fill="#7A5A3A" font-size="14" font-style="italic" font-family="Cormorant Garamond, Georgia, serif">кризис</text>
       </svg>
     </div>
   </div>
 
   <div class="hero__wave">
     <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#F3EDE3"/>
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#F0E8D8"/>
     </svg>
   </div>
 </section>
