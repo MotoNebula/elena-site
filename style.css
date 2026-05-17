@@ -155,7 +155,7 @@ p:last-child { margin-bottom: 0; }
 }
 .nav__links a {
   font-family: var(--ff-ui);
-  color: var(--on-dark);
+  color: var(--text);
   text-decoration: none;
   font-size: 0.78rem;
   font-weight: 400;
@@ -166,6 +166,7 @@ p:last-child { margin-bottom: 0; }
   position: relative;
   padding-bottom: 2px;
 }
+.nav--scrolled .nav__links a { color: var(--on-dark); }
 .nav__links a::after {
   content: '';
   position: absolute;
@@ -206,13 +207,14 @@ p:last-child { margin-bottom: 0; }
   display: block;
   width: 24px;
   height: 2px;
-  background: var(--on-dark);
+  background: var(--text);
   border-radius: 2px;
 }
+.nav--scrolled .nav__burger span { background: var(--on-dark); }
 
-/* ── HERO (dark cinematic) ── */
+/* ── HERO (warm cream-gold) ── */
 .hero {
-  background: var(--ink);
+  background: linear-gradient(145deg, #FAF2E0 0%, #F4E6C6 55%, #EDD9AE 100%);
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -221,21 +223,20 @@ p:last-child { margin-bottom: 0; }
   position: relative;
   overflow: hidden;
 }
-/* Атмосферные свечения */
 .hero::before {
   content: '';
   position: absolute;
-  top: -120px; right: -160px;
-  width: 720px; height: 720px;
-  background: radial-gradient(ellipse at center, rgba(196, 154, 60, 0.065) 0%, transparent 60%);
+  top: -80px; right: -120px;
+  width: 600px; height: 600px;
+  background: radial-gradient(ellipse at center, rgba(196, 154, 60, 0.12) 0%, transparent 60%);
   pointer-events: none;
 }
 .hero::after {
   content: '';
   position: absolute;
-  bottom: 60px; left: -100px;
-  width: 560px; height: 560px;
-  background: radial-gradient(ellipse at center, rgba(158, 74, 53, 0.055) 0%, transparent 65%);
+  bottom: 60px; left: -80px;
+  width: 480px; height: 480px;
+  background: radial-gradient(ellipse at center, rgba(196, 131, 107, 0.1) 0%, transparent 65%);
   pointer-events: none;
 }
 
@@ -266,7 +267,7 @@ p:last-child { margin-bottom: 0; }
   font-family: var(--ff-display);
   font-size: clamp(2rem, 5vw, 3.2rem);
   font-style: italic;
-  color: var(--gold-dim);
+  color: var(--clay);
   margin-bottom: 0.6rem;
   font-weight: 300;
   animation: fadeSlideUp 0.7s 0.05s ease both;
@@ -277,7 +278,7 @@ p:last-child { margin-bottom: 0; }
   font-size: clamp(3.2rem, 8vw, 7rem);
   font-weight: 300;
   line-height: 1.02;
-  color: var(--on-dark);
+  color: var(--text);
   margin-bottom: 1.25rem;
   animation: fadeSlideUp 0.85s 0.18s ease both;
   letter-spacing: -0.02em;
@@ -285,7 +286,7 @@ p:last-child { margin-bottom: 0; }
 .hero__tagline {
   font-family: var(--ff-body);
   font-size: 1.05rem;
-  color: var(--on-dark-muted);
+  color: var(--text-muted);
   margin-bottom: 0.6rem;
   max-width: 420px;
   line-height: 1.75;
@@ -295,7 +296,7 @@ p:last-child { margin-bottom: 0; }
   font-family: var(--ff-display);
   font-style: italic;
   font-size: 1.18rem;
-  color: var(--gold-dim);
+  color: var(--clay);
   font-weight: 300;
   margin-bottom: 2.5rem;
   animation: fadeSlideUp 0.7s 0.44s ease both;
