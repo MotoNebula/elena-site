@@ -24,7 +24,7 @@
       <li><a href="#about">Обо мне</a></li>
       <li><a href="#method">Подход</a></li>
       <li><a href="#education">Образование</a></li>
-
+      <li><a href="#pricing">Стоимость</a></li>
       <li><a href="#contacts" class="nav__cta">Написать</a></li>
     </ul>
   </div>
@@ -37,7 +37,7 @@
       <p class="hero__eyebrow">Елена Коновалова</p>
       <h1 class="hero__name">Твой кризисный<br>психолог</h1>
       <p class="hero__tagline">Готова быть рядом в непростой период вашей жизни</p>
-      <p class="hero__micro">Не обязательно проходить это одному.</p>
+      <p class="hero__micro">Не обязательно проходить это в одиночестве.</p>
       <a href="#contacts" class="btn btn--primary">Записаться на консультацию</a>
     </div>
 
@@ -111,14 +111,17 @@
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
           >
           <div class="about__photo-fallback">
-            <span>Фото<br>скоро</span>
+            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="36" cy="26" r="14" fill="#C4836B" opacity="0.35"/>
+              <ellipse cx="36" cy="58" rx="22" ry="13" fill="#C4836B" opacity="0.25"/>
+            </svg>
           </div>
         </div>
       </div>
       <div class="about__text">
-        <h2>Привет, я Лена</h2>
+        <h2>Меня зовут Лена</h2>
         <p class="about__role">Кризисный психолог</p>
-        <p class="about__accent">Я знаю, как бывает больно и одиноко. Поэтому моя работа состоит в том, чтобы быть рядом бережно, честно и внимательно.</p>
+        <p class="about__accent">Я знаю, как бывает больно и одиноко. Поэтому моя работа — быть рядом бережно, честно и внимательно.</p>
         <p>Помогаю тем, кто жил в боли, критике и эмоциональном холоде.</p>
         <p>Работаю сопровождающим психологом при прохождении программ 12 шагов ВДА/ДФС, любовная зависимость/созависимость.</p>
         <p>В профессию пришла через личный кризис. Теперь точно знаю: в любой, даже самой трудной ситуации можно найти опору и осознать свою способность расти.</p>
@@ -133,8 +136,8 @@
 <!-- JOURNEY (MARIO) -->
 <section class="section journey" id="journey">
   <div class="container">
-    <h2 class="journey__title">Путь героя</h2>
-    <p class="journey__subtitle">Каждый из нас — герой своей истории. На пути встречаются препятствия, но каждое преодоление добавляет силу.</p>
+    <h2 class="journey__title">Путь к себе</h2>
+    <p class="journey__subtitle">Каждый из нас проходит свой путь. На нём встречаются трудности — но каждое преодоление делает нас сильнее.</p>
   </div>
   <div class="journey__canvas-wrap">
     <canvas id="marioCanvas"></canvas>
@@ -261,6 +264,28 @@
   </div>
 </section>
 
+<!-- PRICING -->
+<section class="section pricing" id="pricing">
+  <div class="container">
+    <h2>Стоимость</h2>
+    <p class="pricing__sub">Индивидуальная консультация онлайн</p>
+    <div class="pricing__grid">
+      <div class="pricing__card">
+        <span class="pricing__label">Разовая консультация</span>
+        <span class="pricing__price">3 000 ₽</span>
+        <span class="pricing__duration">50 минут</span>
+      </div>
+      <div class="pricing__card pricing__card--featured">
+        <span class="pricing__badge">Популярный формат</span>
+        <span class="pricing__label">Пакет 4 сессии</span>
+        <span class="pricing__price">10 000 ₽</span>
+        <span class="pricing__duration">4 × 50 минут</span>
+      </div>
+    </div>
+    <p class="pricing__note">Первая встреча — знакомство и прояснение запроса. Оплата переводом после подтверждения записи.</p>
+  </div>
+</section>
+
 <!-- CONTACTS -->
 <section class="section contacts" id="contacts">
   <!-- мягкое пятно и намёк на конверт -->
@@ -318,16 +343,16 @@
     { src: 'img/fact-dance.jpg',
       title: 'Восточные танцы',
       detail: 'Выигрывала кубки по восточным танцам — этот путь привёл к йоге и телесным практикам' },
-    { src: 'img/фитнес-бикини.jpg',
+    { src: 'img/fitness-bikini.jpg',
       title: 'Фитнес-бикини',
       detail: 'Готовилась к соревнованиям в номинации фитнес-бикини — травма стала поворотным моментом' },
-    { src: 'img/йога.jpg',
+    { src: 'img/yoga.jpg',
       title: 'Йога',
       detail: 'С 2013 года изучаю духовные практики: випассана, йога, буддизм. Сертифицированный преподаватель йоги' },
-    { src: 'img/йога1.jpg',
+    { src: 'img/yoga1.jpg',
       title: 'Практика йоги',
       detail: 'Регулярная практика как путь к интеграции тела, ума и эмоций' },
-    { src: 'img/йога2.jpg',
+    { src: 'img/yoga2.jpg',
       title: 'Йога и осознанность',
       detail: 'Преподавание йоги и личная практика как основа психологической работы' },
     { src: 'img/fact-nepal-monks.jpg',
@@ -336,10 +361,10 @@
     { src: 'img/fact-nepal-stupa.jpg',
       title: 'Боднатх, Непал',
       detail: 'Ступа Боднатх — одно из священных мест буддизма. Место силы, медитации и глубокого погружения в себя' },
-    { src: 'img/непал2.jpg',
+    { src: 'img/nepal2.jpg',
       title: 'Непал',
       detail: 'Путешествие в Непал как часть духовного пути и исследования природы сознания' },
-    { src: 'img/%D0%B2%D1%8B%D1%85%D0%BE%D0%B4%20%D0%B8%D0%B7%20%D0%BA%D1%80%D0%B8%D0%B7%D0%B8%D1%81%D0%B0.png',
+    { src: 'img/exit-crisis.png',
       title: 'Выход из кризиса',
       detail: 'Благодаря исследовательскому интересу к устройству человека и сознания — благополучно пережила собственный экзистенциальный кризис' },
   ];

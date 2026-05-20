@@ -1,8 +1,8 @@
 /* ── TOKENS ── */
 :root {
   /* Light surfaces */
-  --cream: #4a9e6b;
-  --beige: #3d8a5c;
+  --cream: #F8F1E3;
+  --beige: #EFE4D2;
   --sage: #8A9E7E;
   --sage-light: #D8ECD4;
   --clay: #C4836B;
@@ -582,6 +582,88 @@ p:last-child { margin-bottom: 0; }
   font-size: 0.78rem;
   color: var(--text-muted);
   font-family: var(--ff-ui);
+}
+
+/* ── PRICING ── */
+.pricing {
+  background: var(--ink-mid);
+  position: relative;
+  overflow: hidden;
+}
+.pricing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 600px 400px at 60% 50%, rgba(196, 154, 60, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.pricing .container { position: relative; z-index: 1; }
+.pricing h2 { color: var(--on-dark); }
+.pricing__sub {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--gold-dim);
+  margin-bottom: 2rem;
+}
+.pricing__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  max-width: 640px;
+  margin-bottom: 1.5rem;
+}
+.pricing__card {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(240, 232, 216, 0.1);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: border-color 0.3s;
+}
+.pricing__card:hover { border-color: rgba(196, 154, 60, 0.3); }
+.pricing__card--featured {
+  border-color: rgba(196, 154, 60, 0.35);
+  background: rgba(196, 154, 60, 0.06);
+  position: relative;
+}
+.pricing__badge {
+  font-family: var(--ff-ui);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.2rem;
+}
+.pricing__label {
+  font-family: var(--ff-serif);
+  font-size: 1rem;
+  color: var(--on-dark);
+}
+.pricing__price {
+  font-family: var(--ff-serif);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1.1;
+}
+.pricing__duration {
+  font-family: var(--ff-ui);
+  font-size: 0.8rem;
+  color: var(--on-dark-muted);
+}
+.pricing__note {
+  font-family: var(--ff-ui);
+  font-size: 0.82rem;
+  color: var(--on-dark-muted);
+  max-width: 500px;
+  line-height: 1.75;
+}
+@media (max-width: 540px) {
+  .pricing__grid { grid-template-columns: 1fr; }
 }
 
 /* ── CONTACTS (warm light) ── */
